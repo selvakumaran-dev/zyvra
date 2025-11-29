@@ -1,0 +1,57 @@
+.page {
+    padding: 24px;
+}
+
+.header {
+    margin-bottom: 24px;
+}
+
+.title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 8px 0;
+}
+
+.subtitle {
+    color: #6B7280;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 2px solid #E5E7EB;
+    margin-bottom: 24px;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #6B7280;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: -2px;
+}
+
+.tab:hover {
+    color: #3B82F6;
+    background-color: #F3F4F6;
+}
+
+.activeTab {
+    color: #3B82F6;
+    border-bottom-color: #3B82F6;
+}
+
+.content {
+    min-height: 400px;
+}

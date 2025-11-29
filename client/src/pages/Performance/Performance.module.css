@@ -1,0 +1,234 @@
+.page {
+    max-width: 1400px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-xl);
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin-bottom: var(--space-xs);
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+}
+
+.actions {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-lg);
+}
+
+.sectionTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+    margin-bottom: var(--space-md);
+}
+
+.goalsList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.goalCard {
+    padding: var(--space-lg);
+}
+
+.goalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-lg);
+}
+
+.goalInfo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.goalTitle {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+}
+
+.goalMeta {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+}
+
+.progressContainer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.progressBar {
+    flex: 1;
+    height: 8px;
+    background-color: var(--color-bg-body);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width 0.5s ease;
+}
+
+.progressText {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+    width: 40px;
+    text-align: right;
+}
+
+.goalActions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #E5E7EB;
+}
+
+.updateLabel {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #6B7280;
+}
+
+.progressSelect {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #374151;
+    background: white;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.progressSelect:hover {
+    border-color: #3B82F6;
+}
+
+.progressSelect:focus {
+    outline: none;
+    border-color: #3B82F6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.sideColumn {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.reviewStats {
+    display: flex;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.statItem {
+    flex: 1;
+}
+
+.statValue {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+}
+
+.statLabel {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+}
+
+.reviewsList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.reviewItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.performerItem {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.performerItem:last-child {
+    border-bottom: none;
+}
+
+.rank {
+    width: 24px;
+    height: 24px;
+    background-color: var(--color-bg-body);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+}
+
+.performerInfo {
+    flex: 1;
+}
+
+.performerName {
+    font-weight: 500;
+    color: var(--color-text-main);
+    font-size: 0.875rem;
+}
+
+.performerRole {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.performerScore {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #3B82F6;
+}
+
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}

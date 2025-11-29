@@ -1,0 +1,282 @@
+.page {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding-bottom: 40px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #ffffff 0%, #F8FAFC 100%);
+    padding: 32px;
+    border-radius: 24px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.profileHeader {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.avatarContainer {
+    position: relative;
+    width: 96px;
+    height: 96px;
+}
+
+.avatarLarge {
+    width: 96px;
+    height: 96px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 600;
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+}
+
+.avatarImage {
+    width: 96px;
+    height: 96px;
+    border-radius: 24px;
+    object-fit: cover;
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+}
+
+.uploadButton {
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    width: 36px;
+    height: 36px;
+    background: #3B82F6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+}
+
+.uploadButton:hover {
+    background: #2563EB;
+    transform: scale(1.1);
+}
+
+.name {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1E293B;
+    margin: 0 0 4px 0;
+    letter-spacing: -0.5px;
+}
+
+.role {
+    color: #64748B;
+    font-size: 1.1rem;
+    margin: 0 0 12px 0;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.joinDate {
+    font-size: 0.9rem;
+    color: #94A3B8;
+}
+
+.tabs {
+    display: flex;
+    gap: 32px;
+    border-bottom: 1px solid #E2E8F0;
+    padding: 0 8px;
+}
+
+.tab {
+    padding: 16px 0;
+    color: #64748B;
+    font-weight: 600;
+    font-size: 0.95rem;
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.tab:hover {
+    color: #1E293B;
+}
+
+.activeTab {
+    color: #3B82F6;
+}
+
+.activeTab::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #3B82F6;
+    border-radius: 3px 3px 0 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 24px;
+}
+
+.infoRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.infoRow:last-child {
+    margin-bottom: 0;
+}
+
+.icon {
+    color: #94A3B8;
+    margin-top: 2px;
+    background: #F1F5F9;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.label {
+    font-size: 0.75rem;
+    color: #64748B;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+.value {
+    font-size: 1rem;
+    color: #1E293B;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.payslipList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.payslipItem {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    gap: 20px;
+    transition: all 0.2s;
+}
+
+.payslipItem:hover {
+    background-color: #F8FAFC;
+    border-color: #CBD5E1;
+}
+
+.payslipIcon {
+    color: #3B82F6;
+    background-color: #EFF6FF;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.payslipInfo {
+    flex: 1;
+}
+
+.payslipTitle {
+    font-weight: 600;
+    color: #1E293B;
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+}
+
+.payslipDate {
+    font-size: 0.85rem;
+    color: #64748B;
+}
+
+.payslipAmount {
+    font-weight: 700;
+    color: #1E293B;
+    font-size: 1.1rem;
+    margin-right: 16px;
+}
+
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    color: #94A3B8;
+}
+
+.emptyIcon {
+    width: 80px;
+    height: 80px;
+    background: #F1F5F9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: #CBD5E1;
+}
+
+.emptyState h3 {
+    color: #334155;
+    font-size: 1.25rem;
+    margin: 0 0 8px 0;
+}
+
+.emptyState p {
+    color: #64748B;
+    max-width: 300px;
+    line-height: 1.5;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    color: #64748B;
+    font-size: 1.1rem;
+}
+
+.error {
+    text-align: center;
+    padding: 40px;
+    color: #EF4444;
+    background: #FEF2F2;
+    border-radius: 12px;
+    border: 1px solid #FECACA;
+}

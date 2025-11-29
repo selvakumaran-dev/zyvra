@@ -1,0 +1,11 @@
+.container {
+    padding: 1rem 0;
+}
+
+.empty {
+    text-align: center;
+    color: #666;
+    padding: 2rem;
+    background: #f9fafb;
+    border-radius: 8px;
+}

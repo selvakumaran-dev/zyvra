@@ -1,0 +1,214 @@
+.page {
+    max-width: 1600px;
+    height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-lg);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-lg);
+    flex-shrink: 0;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin-bottom: var(--space-xs);
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+}
+
+.actions {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.jobsList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.jobCard {
+    background-color: var(--color-bg-surface);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    transition: box-shadow 0.2s ease;
+}
+
+.jobCard:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.jobHeader {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.jobIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-bg-body);
+    border-radius: var(--radius-md);
+    color: var(--color-accent);
+    flex-shrink: 0;
+}
+
+.jobInfo {
+    flex: 1;
+}
+
+.titleRow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xs);
+}
+
+.jobTitle {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+    margin: 0;
+}
+
+.jobMeta {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.jobFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+}
+
+.applicationCount {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+}
+
+.actionButtons {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+}
+
+.deleteButton {
+    background: none;
+    border: none;
+    color: var(--color-error);
+    cursor: pointer;
+    padding: var(--space-xs);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.deleteButton:hover {
+    background-color: var(--color-error-bg);
+}
+
+.sectionTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+    margin-bottom: var(--space-md);
+}
+
+.applicantsSection {
+    margin-top: 40px;
+}
+
+.applicantsTableContainer {
+    background: var(--color-bg-surface);
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.applicantsTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.applicantsTable th {
+    background-color: var(--color-bg-secondary);
+    padding: 16px 24px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.applicantsTable td {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-primary);
+    font-size: 0.95rem;
+}
+
+.applicantRow {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.applicantRow:hover {
+    background-color: var(--color-bg-hover);
+}
+
+.applicantRow:last-child td {
+    border-bottom: none;
+}
+
+.nameCell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+}
+
+.avatarSmall {
+    width: 32px;
+    height: 32px;
+    background-color: var(--color-bg-body);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+}
+
+.emptyCell {
+    text-align: center;
+    padding: 40px;
+    color: var(--color-text-muted);
+}

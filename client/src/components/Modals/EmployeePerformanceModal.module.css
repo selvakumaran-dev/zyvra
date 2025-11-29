@@ -1,0 +1,111 @@
+.container {
+    padding: 20px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.loading,
+.empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6B7280;
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.goalsList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.goalCard {
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.goalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.goalInfo {
+    flex: 1;
+}
+
+.goalTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 8px 0;
+}
+
+.goalDescription {
+    font-size: 0.9rem;
+    color: #6B7280;
+    margin: 8px 0;
+}
+
+.goalMeta {
+    font-size: 0.85rem;
+    color: #9CA3AF;
+    margin-top: 8px;
+}
+
+.progressSection {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.progressBar {
+    flex: 1;
+    height: 8px;
+    background: #E5E7EB;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    transition: width 0.3s ease;
+    border-radius: 4px;
+}
+
+.progressText {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #374151;
+    min-width: 45px;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+}
+
+.progressSelect {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #374151;
+    background: white;
+    cursor: pointer;
+}
+
+.progressSelect:focus {
+    outline: none;
+    border-color: #3B82F6;
+}

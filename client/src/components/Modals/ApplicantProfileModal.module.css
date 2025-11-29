@@ -1,0 +1,308 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal {
+    background: white;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 700px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #6B7280;
+    padding: 4px;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.closeButton:hover {
+    background: #F3F4F6;
+    color: #111827;
+}
+
+.content {
+    padding: 24px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.loading,
+.error {
+    text-align: center;
+    padding: 40px;
+    color: #6B7280;
+}
+
+.profileHeader {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #F3F4F6;
+}
+
+.avatar {
+    width: 64px;
+    height: 64px;
+    background-color: #EFF6FF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0066FF;
+    flex-shrink: 0;
+}
+
+.profileInfo {
+    flex: 1;
+}
+
+.name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 8px 0;
+}
+
+.contactGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contactItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #4B5563;
+    font-size: 0.95rem;
+}
+
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.resumeButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: #0066FF;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    height: fit-content;
+    border: none;
+    cursor: pointer;
+}
+
+.resumeButton:hover {
+    background-color: #0052CC;
+}
+
+.deleteButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: #FEE2E2;
+    color: #DC2626;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    height: fit-content;
+    cursor: pointer;
+}
+
+.deleteButton:hover {
+    background-color: #FECACA;
+    color: #B91C1C;
+}
+
+.section {
+    margin-bottom: 32px;
+}
+
+.sectionTitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 16px 0;
+}
+
+.infoGrid {
+    display: grid;
+    gap: 20px;
+}
+
+.infoItem {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.label {
+    font-size: 0.85rem;
+    color: #6B7280;
+    font-weight: 500;
+}
+
+.value {
+    font-size: 1rem;
+    color: #111827;
+}
+
+.skillsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skillTag {
+    padding: 4px 12px;
+    background-color: #F3F4F6;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #4B5563;
+}
+
+.applicationsList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.applicationCard {
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.appHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.jobTitle {
+    font-weight: 600;
+    color: #111827;
+    font-size: 1.05rem;
+}
+
+.department {
+    color: #6B7280;
+    font-weight: 400;
+    font-size: 0.95rem;
+}
+
+.statusBadge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.statusBadge.applied {
+    background: #EFF6FF;
+    color: #1D4ED8;
+}
+
+.statusBadge.screening {
+    background: #FEF3C7;
+    color: #D97706;
+}
+
+.statusBadge.interview {
+    background: #E0E7FF;
+    color: #4338CA;
+}
+
+.statusBadge.offer {
+    background: #ECFDF5;
+    color: #059669;
+}
+
+.statusBadge.rejected {
+    background: #FEF2F2;
+    color: #DC2626;
+}
+
+.appMeta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: #6B7280;
+    margin-bottom: 12px;
+}
+
+.coverLetter {
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #E5E7EB;
+    font-size: 0.9rem;
+    color: #4B5563;
+    line-height: 1.5;
+}

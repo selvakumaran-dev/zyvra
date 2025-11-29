@@ -1,0 +1,61 @@
+.toggle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-bg-body);
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.toggle:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    transform: scale(1.05);
+}
+
+.toggle:hover .iconWrapper {
+    color: white;
+}
+
+.iconWrapper {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    color: var(--color-text-main);
+    transition: all 0.3s ease;
+}
+
+.sunIcon,
+.moonIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+}
+
+.sunIcon {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+}
+
+.moonIcon {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(180deg) scale(0);
+}
+
+.iconWrapper.dark .sunIcon {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-180deg) scale(0);
+}
+
+.iconWrapper.dark .moonIcon {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+}

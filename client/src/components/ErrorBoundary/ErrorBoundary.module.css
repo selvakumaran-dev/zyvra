@@ -1,0 +1,130 @@
+.errorBoundary {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background-color: var(--color-bg-body);
+}
+
+.errorContent {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    background-color: var(--color-bg-surface);
+    padding: 48px 32px;
+    border-radius: 16px;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.iconWrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.icon {
+    color: #ef4444;
+}
+
+.title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin-bottom: 12px;
+}
+
+.message {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    margin-bottom: 32px;
+    line-height: 1.6;
+}
+
+.errorDetails {
+    text-align: left;
+    margin: 24px 0;
+    padding: 16px;
+    background-color: var(--color-bg-body);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+}
+
+.errorSummary {
+    font-weight: 600;
+    color: var(--color-text-main);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.errorSummary:hover {
+    background-color: var(--color-bg-surface);
+}
+
+.errorStack {
+    margin-top: 16px;
+}
+
+.errorMessage {
+    color: var(--color-text-main);
+    margin-bottom: 12px;
+    word-break: break-word;
+}
+
+.stackTrace {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    padding: 16px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.retryButton,
+.homeButton {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+}
+
+.retryButton {
+    background-color: var(--color-accent);
+    color: white;
+}
+
+.retryButton:hover {
+    background-color: #2563eb;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.homeButton {
+    background-color: var(--color-bg-body);
+    color: var(--color-text-main);
+    border: 1.5px solid var(--color-border);
+}
+
+.homeButton:hover {
+    background-color: var(--color-bg-surface);
+    border-color: var(--color-accent);
+}

@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 200px;
+    color: var(--color-text-secondary);
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+    color: var(--color-primary-500);
+}
+
+.small {
+    width: 16px;
+    height: 16px;
+}
+
+.medium {
+    width: 32px;
+    height: 32px;
+}
+
+.large {
+    width: 48px;
+    height: 48px;
+}
+
+.text {
+    margin-top: var(--space-md);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

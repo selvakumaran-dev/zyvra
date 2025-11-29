@@ -1,0 +1,34 @@
+.layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    width: 100%;
+}
+
+.content {
+    flex: 1;
+    padding: var(--space-xl) var(--space-lg);
+    background-color: var(--color-bg-body);
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+    .main {
+        margin-left: 0;
+        max-width: 100vw;
+    }
+
+    .content {
+        padding: var(--space-md);
+    }
+}

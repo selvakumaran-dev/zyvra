@@ -1,0 +1,329 @@
+import React, { useState, useEffect } from 'react';
+import { Calendar, Clock, User, Plus, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import Card from '../UI/Card';
+import Button from '../UI/Button';
+import Badge from '../UI/Badge';
+import api from '../../services/api';
+import styles from './EmployeeDashboard.module.css';
+
+const EmployeeDashboard = () => {
+    const { user } = useAuth();
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+    const [leaveBalance, setLeaveBalance] = useState({
+        casual: { used: 0, total: 12 },
+        sick: { used: 0, total: 10 },
+        earned: { used: 0, total: 18 }
+    });
+    const [attendanceSummary, setAttendanceSummary] = useState({
+        present: 0,
+        absent: 0,
+        late: 0,
+        thisMonth: 0
+    });
+    const [recentLeaves, setRecentLeaves] = useState([]);
+    const [jobOpenings, setJobOpenings] = useState([]);
+
+    useEffect(() => {
+        fetchDashboardData();
+    }, []);
+
+    const fetchDashboardData = async () => {
+        try {
+            setLoading(true);
+
+            // Fetch global settings for default balance
+            let globalSettings = {
+                casualLeave: 12,
+                sickLeave: 10,
+                earnedLeave: 18
+            };
+
+            try {
+                const settingsRes = await api.get('/settings');
+                if (settingsRes.data.data?.leaveSettings) {
+                    globalSettings = settingsRes.data.data.leaveSettings;
+                }
+            } catch (error) {
+                console.error('Failed to fetch global settings', error);
+            }
+
+            // Fetch employee data to get leave balance configuration
+            let employeeLeaveConfig = {};
+
+            try {
+                const employeeRes = await api.get(`/employees/${user?.employee?._id}`);
+                if (employeeRes.data.data?.leaveBalance) {
+                    employeeLeaveConfig = employeeRes.data.data.leaveBalance;
+                }
+            } catch (error) {
+                console.error('Failed to fetch employee data:', error);
+            }
+
+            // Merge global settings with employee specific config
+            // Employee config takes precedence
+            const finalLeaveConfig = {
+                casualLeave: employeeLeaveConfig.casualLeave || globalSettings.casualLeave || 12,
+                sickLeave: employeeLeaveConfig.sickLeave || globalSettings.sickLeave || 10,
+                earnedLeave: employeeLeaveConfig.earnedLeave || globalSettings.earnedLeave || 18
+            };
+
+            // Fetch leaves to calculate balance
+            const leavesRes = await api.get('/leaves');
+            const leaves = leavesRes.data.data || [];
+
+            // Filter user's leaves
+            const userLeaves = leaves.filter(leave =>
+                leave.employee?._id === user?.employee?._id ||
+                leave.employee === user?.employee?._id
+            );
+
+            // Calculate leave balance
+            const casualUsed = userLeaves.filter(l => l.type === 'Casual Leave' && l.status === 'Approved').length;
+            const sickUsed = userLeaves.filter(l => l.type === 'Sick Leave' && l.status === 'Approved').length;
+            const earnedUsed = userLeaves.filter(l => l.type === 'Earned Leave' && l.status === 'Approved').length;
+
+            setLeaveBalance({
+                casual: { used: casualUsed, total: finalLeaveConfig.casualLeave },
+                sick: { used: sickUsed, total: finalLeaveConfig.sickLeave },
+                earned: { used: earnedUsed, total: finalLeaveConfig.earnedLeave }
+            });
+
+            // Get recent leaves
+            setRecentLeaves(userLeaves.slice(0, 3));
+
+            // Fetch attendance
+            try {
+                const attendanceRes = await api.get('/attendance');
+                const attendance = attendanceRes.data.data || [];
+
+                const userAttendance = attendance.filter(a =>
+                    a.employee?._id === user?.employee?._id ||
+                    a.employee === user?.employee?._id
+                );
+
+                const present = userAttendance.filter(a => a.status === 'Present').length;
+                const absent = userAttendance.filter(a => a.status === 'Absent').length;
+                const late = userAttendance.filter(a => a.status === 'Late').length;
+
+                setAttendanceSummary({
+                    present,
+                    absent,
+                    late,
+                    thisMonth: userAttendance.length
+                });
+            } catch (error) {
+                console.error('Failed to fetch attendance:', error);
+            }
+
+            // Fetch job openings
+            try {
+                const jobsRes = await api.get('/recruitment/jobs');
+                const jobs = jobsRes.data.data || [];
+                const openJobs = jobs.filter(job => job.status === 'Open');
+                setJobOpenings(openJobs.slice(0, 3));
+            } catch (error) {
+                console.error('Failed to fetch job openings:', error);
+            }
+
+        } catch (error) {
+            console.error('Error fetching dashboard data:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (loading) {
+        return (
+            <div className={styles.container}>
+                <div className={styles.loading}>Loading your dashboard...</div>
+            </div>
+        );
+    }
+
+    return (
+        <div className={styles.container}>
+            <div className={styles.header}>
+                <div>
+                    <h1 className={styles.title}>
+                        Welcome back, {user?.employee?.firstName || 'Employee'}!
+                    </h1>
+                    <p className={styles.subtitle}>Here's your overview for today</p>
+                </div>
+            </div>
+
+            {/* Quick Actions */}
+            <div className={styles.quickActions}>
+                <Button onClick={() => navigate('/leave')} className={styles.actionButton}>
+                    <Plus size={18} />
+                    Apply Leave
+                </Button>
+                <Button onClick={() => navigate('/attendance')} variant="secondary" className={styles.actionButton}>
+                    <Clock size={18} />
+                    Mark Attendance
+                </Button>
+                <Button onClick={() => navigate('/profile')} variant="secondary" className={styles.actionButton}>
+                    <User size={18} />
+                    View Profile
+                </Button>
+            </div>
+
+            {/* Job Openings - Featured Section */}
+            {jobOpenings.length > 0 && (
+                <div className={styles.featuredSection}>
+                    <div className={styles.featuredHeader}>
+                        <div className={styles.featuredIcon}>💼</div>
+                        <div>
+                            <h2 className={styles.featuredTitle}>New Job Openings</h2>
+                            <p className={styles.featuredSubtitle}>Check out these exciting opportunities!</p>
+                        </div>
+                    </div>
+                    <div className={styles.jobsList}>
+                        {jobOpenings.map((job) => (
+                            <div key={job._id} className={styles.featuredJobItem}>
+                                <div className={styles.jobInfo}>
+                                    <div className={styles.featuredJobTitle}>{job.title}</div>
+                                    <div className={styles.jobDetails}>
+                                        📍 {job.location} • 🏢 {job.department} • ⏰ {job.type}
+                                    </div>
+                                </div>
+                                <Badge variant="success">{job.status}</Badge>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {/* Personal Info Overview */}
+            <Card title="Personal Information" className={styles.infoCard}>
+                <div className={styles.infoGrid}>
+                    <div className={styles.infoItem}>
+                        <span className={styles.infoLabel}>Name</span>
+                        <span className={styles.infoValue}>
+                            {user?.employee?.firstName} {user?.employee?.lastName}
+                        </span>
+                    </div>
+                    <div className={styles.infoItem}>
+                        <span className={styles.infoLabel}>Department</span>
+                        <span className={styles.infoValue}>{user?.employee?.department || 'N/A'}</span>
+                    </div>
+                    <div className={styles.infoItem}>
+                        <span className={styles.infoLabel}>Designation</span>
+                        <span className={styles.infoValue}>{user?.employee?.designation || 'N/A'}</span>
+                    </div>
+                    <div className={styles.infoItem}>
+                        <span className={styles.infoLabel}>Employee Type</span>
+                        <span className={styles.infoValue}>{user?.employee?.type || 'Full-Time'}</span>
+                    </div>
+                </div>
+            </Card>
+
+            <div className={styles.gridContainer}>
+                {/* Leave Balance */}
+                <Card title="Leave Balance" icon={Calendar} className={styles.leaveCard}>
+                    <div className={styles.leaveBalances}>
+                        <div className={styles.leaveItem}>
+                            <div className={styles.leaveType}>Casual Leave</div>
+                            <div className={styles.leaveCount}>
+                                <span className={styles.remaining}>{leaveBalance.casual.total - leaveBalance.casual.used}</span>
+                                <span className={styles.total}>/ {leaveBalance.casual.total}</span>
+                            </div>
+                            <div className={styles.leaveBar}>
+                                <div
+                                    className={styles.leaveProgress}
+                                    style={{ width: `${((leaveBalance.casual.total - leaveBalance.casual.used) / leaveBalance.casual.total) * 100}%` }}
+                                />
+                            </div>
+                        </div>
+                        <div className={styles.leaveItem}>
+                            <div className={styles.leaveType}>Sick Leave</div>
+                            <div className={styles.leaveCount}>
+                                <span className={styles.remaining}>{leaveBalance.sick.total - leaveBalance.sick.used}</span>
+                                <span className={styles.total}>/ {leaveBalance.sick.total}</span>
+                            </div>
+                            <div className={styles.leaveBar}>
+                                <div
+                                    className={styles.leaveProgress}
+                                    style={{ width: `${((leaveBalance.sick.total - leaveBalance.sick.used) / leaveBalance.sick.total) * 100}%` }}
+                                />
+                            </div>
+                        </div>
+                        <div className={styles.leaveItem}>
+                            <div className={styles.leaveType}>Earned Leave</div>
+                            <div className={styles.leaveCount}>
+                                <span className={styles.remaining}>{leaveBalance.earned.total - leaveBalance.earned.used}</span>
+                                <span className={styles.total}>/ {leaveBalance.earned.total}</span>
+                            </div>
+                            <div className={styles.leaveBar}>
+                                <div
+                                    className={styles.leaveProgress}
+                                    style={{ width: `${((leaveBalance.earned.total - leaveBalance.earned.used) / leaveBalance.earned.total) * 100}%` }}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </Card>
+
+                {/* Attendance Summary */}
+                <Card title="Attendance Summary" icon={Clock} className={styles.attendanceCard}>
+                    <div className={styles.attendanceStats}>
+                        <div className={styles.attendanceStat}>
+                            <CheckCircle size={24} className={styles.iconPresent} />
+                            <div className={styles.statContent}>
+                                <div className={styles.statValue}>{attendanceSummary.present}</div>
+                                <div className={styles.statLabel}>Present</div>
+                            </div>
+                        </div>
+                        <div className={styles.attendanceStat}>
+                            <XCircle size={24} className={styles.iconAbsent} />
+                            <div className={styles.statContent}>
+                                <div className={styles.statValue}>{attendanceSummary.absent}</div>
+                                <div className={styles.statLabel}>Absent</div>
+                            </div>
+                        </div>
+                        <div className={styles.attendanceStat}>
+                            <AlertCircle size={24} className={styles.iconLate} />
+                            <div className={styles.statContent}>
+                                <div className={styles.statValue}>{attendanceSummary.late}</div>
+                                <div className={styles.statLabel}>Late</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={styles.attendanceFooter}>
+                        Total records this month: {attendanceSummary.thisMonth}
+                    </div>
+                </Card>
+            </div>
+
+            {/* Recent Leave Requests */}
+            <Card title="Recent Leave Requests" className={styles.recentLeaves}>
+                {recentLeaves.length === 0 ? (
+                    <div className={styles.emptyState}>No leave requests yet</div>
+                ) : (
+                    <div className={styles.leavesList}>
+                        {recentLeaves.map((leave) => (
+                            <div key={leave._id} className={styles.leaveRequestItem}>
+                                <div className={styles.leaveRequestInfo}>
+                                    <div className={styles.leaveRequestType}>{leave.type}</div>
+                                    <div className={styles.leaveRequestDate}>
+                                        {new Date(leave.startDate).toLocaleDateString()} - {new Date(leave.endDate).toLocaleDateString()}
+                                    </div>
+                                </div>
+                                <Badge variant={
+                                    leave.status === 'Approved' ? 'success' :
+                                        leave.status === 'Rejected' ? 'error' : 'warning'
+                                }>
+                                    {leave.status}
+                                </Badge>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </Card>
+        </div>
+    );
+};
+
+export default EmployeeDashboard;

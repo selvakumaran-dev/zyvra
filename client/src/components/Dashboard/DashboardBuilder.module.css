@@ -1,0 +1,103 @@
+.container {
+    padding: var(--space-lg);
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.pageTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.actions {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-surface);
+    color: var(--color-text-primary);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.button:hover {
+    background: var(--color-bg-hover);
+}
+
+.primary {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+}
+
+.primary:hover {
+    background: var(--color-primary-dark);
+}
+
+/* Grid Layout Overrides */
+.grid :global(.react-grid-item) {
+    transition: all 200ms ease;
+    transition-property: left, top, width, height;
+}
+
+.grid :global(.react-grid-item.cssTransforms) {
+    transition-property: transform, width, height;
+}
+
+.grid :global(.react-grid-item.resizing) {
+    z-index: 100;
+    box-shadow: var(--shadow-xl);
+    opacity: 0.9;
+}
+
+.grid :global(.react-grid-item.react-grid-placeholder) {
+    background: var(--color-primary);
+    opacity: 0.1 !important;
+    border-radius: var(--radius-lg);
+}
+
+.grid :global(.react-resizable-handle) {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.grid :global(.react-grid-item:hover .react-resizable-handle) {
+    opacity: 1;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+}
+
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    font-size: 1.1rem;
+    color: #EF4444;
+    background: #FEF2F2;
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    margin: var(--space-lg);
+}
