@@ -184,3 +184,94 @@ exports.uploadAvatar = async (req, res) => {
         res.status(500).json({ error: { message: error.message } });
     }
 };
+
+// Bulk create employees
+exports.bulkCreateEmployees = async (req, res) => {
+    try {
+        const employees = req.body;
+        if (!Array.isArray(employees)) {
+            return res.status(400).json({ error: { message: 'Input must be an array of employees' } });
+        }
+
+        const results = {
+            success: [],
+            errors: []
+        };
+
+        // Fetch global leave settings once
+        const Settings = require('../models/Settings');
+        const settings = await Settings.findOne();
+        const defaultLeaveBalance = settings?.leaveSettings ? settings.leaveSettings.toObject() : {
+            casualLeave: 12,
+            sickLeave: 10,
+            earnedLeave: 18,
+            unpaidLeave: 0
+        };
+
+        for (let i = 0; i < employees.length; i++) {
+            const employeeData = employees[i];
+            try {
+                // Auto-generate email from firstName if not provided
+                let email = employeeData.email || `${employeeData.firstName.toLowerCase()}@zyvra.com`;
+
+                // Check if email already exists for an ACTIVE employee
+                const existingEmployee = await Employee.findOne({
+                    email: email,
+                    status: { $ne: 'Terminated' }
+                });
+
+                // If email exists, append random number
+                if (existingEmployee) {
+                    const emailParts = email.split('@');
+                    const localPart = emailParts[0];
+                    const domain = emailParts[1];
+
+                    let uniqueEmail = email;
+                    let attempts = 0;
+                    const maxAttempts = 100;
+
+                    while (attempts < maxAttempts) {
+                        const randomNum = Math.floor(Math.random() * 10000);
+                        uniqueEmail = `${localPart}${randomNum}@${domain}`;
+
+                        const duplicate = await Employee.findOne({
+                            email: uniqueEmail,
+                            status: { $ne: 'Terminated' }
+                        });
+
+                        if (!duplicate) {
+                            email = uniqueEmail;
+                            break;
+                        }
+                        attempts++;
+                    }
+
+                    if (attempts >= maxAttempts) {
+                        throw new Error(`Unable to generate unique email for ${email}`);
+                    }
+                }
+
+                const newEmployee = new Employee({
+                    ...employeeData,
+                    email: email,
+                    leaveBalance: defaultLeaveBalance
+                });
+
+                const savedEmployee = await newEmployee.save();
+                results.success.push(savedEmployee);
+            } catch (error) {
+                results.errors.push({
+                    employee: employeeData,
+                    error: error.message
+                });
+            }
+        }
+
+        res.status(201).json({
+            message: `Processed ${employees.length} employees`,
+            data: results
+        });
+    } catch (error) {
+        res.status(500).json({ error: { message: error.message } });
+    }
+};

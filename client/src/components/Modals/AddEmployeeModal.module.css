@@ -52,3 +52,90 @@
     gap: var(--space-md);
     margin-top: var(--space-md);
 }
+
+/* Bulk Import Styles */
+.tabs {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.tab {
+    padding: var(--space-sm) var(--space-md);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--color-text-subtle);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.activeTab {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+.dropzone {
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: var(--color-bg-surface);
+}
+
+.dropzone:hover {
+    border-color: var(--color-primary);
+    background-color: var(--color-bg-subtle);
+}
+
+.previewContainer {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.previewTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.previewTable th,
+.previewTable td {
+    padding: var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+}
+
+.previewTable th {
+    background-color: var(--color-bg-subtle);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.invalidRow {
+    background-color: #FEF2F2;
+}
+
+.errorInput {
+    border-color: #EF4444 !important;
+}
+
+.errorMessage {
+    color: #EF4444;
+    font-size: 0.75rem;
+    margin-top: 2px;
+}
+
+.summary {
+    background-color: var(--color-bg-subtle);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+}

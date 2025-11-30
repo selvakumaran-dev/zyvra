@@ -5,6 +5,7 @@ const upload = require('../middleware/upload');
 
 router.get('/', employeeController.getAllEmployees);
 router.post('/', employeeController.createEmployee);
+router.post('/bulk', employeeController.bulkCreateEmployees);
 router.get('/:id', employeeController.getEmployeeById);
 router.put('/:id', employeeController.updateEmployee);
 router.delete('/:id', employeeController.deleteEmployee);
