@@ -32,7 +32,6 @@ const Integrations = lazy(() => import('./pages/Integrations/Integrations'));
 const Security = lazy(() => import('./pages/Security/Security'));
 const Settings = lazy(() => import('./pages/Settings/Settings'));
 const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
-import AIAssistant from './components/AI/AIAssistant';
 
 function AppContent() {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -93,7 +92,6 @@ function App() {
           <LanguageProvider>
             <BrowserRouter>
               <AppContent />
-              <AIAssistant />
               <Toast />
             </BrowserRouter>
           </LanguageProvider>

@@ -73,8 +73,8 @@ app.use('/api/v1/analytics', require('./routes/analytics'));
 app.use('/api/v1/integrations', require('./routes/integrations'));
 app.use('/api/v1/security', require('./routes/security'));
 app.use('/api/v1/mobile', require('./routes/mobile'));
-app.use('/api/v1/ai', require('./routes/ai'));
 app.use('/api/v1/settings', require('./routes/settings'));
+app.use('/api/v1/reset', require('./routes/reset'));
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {
